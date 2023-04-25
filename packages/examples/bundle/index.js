@@ -11,10 +11,10 @@ $parcel$export($a32bf89f10f59818$exports, "AppDOM", () => $a32bf89f10f59818$expo
 var $168feb6423e4d4f4$export$43a750ddd9f2303e;
 (function(ErrorTypes) {
     ErrorTypes["NO_ELEMENT"] = "ERROR: No element with id ";
-    ErrorTypes["NO_SARA"] = "ERROR: No Sara instance found";
-    ErrorTypes["NO_SARA_ID"] = "ERROR: No Sara id found";
-    ErrorTypes["NO_SARA_DOM"] = "ERROR: No Sara DOM found";
-    ErrorTypes["NO_SARA_DOM_ELEMENT"] = "ERROR: No Sara DOM element found";
+    ErrorTypes["NO_BLAH"] = "ERROR: No Blah instance found";
+    ErrorTypes["NO_BLAH_ID"] = "ERROR: No Blah id found";
+    ErrorTypes["NO_BLAH_DOM"] = "ERROR: No Blah DOM found";
+    ErrorTypes["NO_BLAH_DOM_ELEMENT"] = "ERROR: No Blah DOM element found";
     ErrorTypes["NO_ID"] = "NO_ID";
 })($168feb6423e4d4f4$export$43a750ddd9f2303e || ($168feb6423e4d4f4$export$43a750ddd9f2303e = {}));
 class $168feb6423e4d4f4$export$2191b9da168c6cf0 {
@@ -251,7 +251,7 @@ var $6ff1c4ed1526c2ce$var$__awaiter = undefined && undefined.__awaiter || functi
 class $6ff1c4ed1526c2ce$export$e38207f28c74982d {
     static Template(blah, path, dom) {
         return $6ff1c4ed1526c2ce$var$__awaiter(this, void 0, void 0, function*() {
-            console.log("Template Hot Reloaded", path);
+            console.log("Template Hot Reloaded", path, dom);
             const data = yield (0, $2bd1f20062293b2e$exports.FileParser).parseFile(path);
             const templateDiv = data.template;
             console.log("====================================");
@@ -304,7 +304,7 @@ class $a32bf89f10f59818$export$8a7e3c02f0a262c7 {
     static handleCustomNodes(blah, dom) {
         return $a32bf89f10f59818$var$__awaiter(this, void 0, void 0, function*() {
             const nodeName = dom.nodeName.replace("BLAH.", "");
-            console.log("Handling Custom Nodes", nodeName);
+            // console.log("Handling Custom Nodes", nodeName);
             switch(nodeName){
                 case $a32bf89f10f59818$var$NodeType.TEMPLATE:
                     yield (0, $6ff1c4ed1526c2ce$exports.CustomElement).Template(blah, dom.getAttribute("path"), dom);
@@ -317,16 +317,21 @@ class $a32bf89f10f59818$export$8a7e3c02f0a262c7 {
     // ? Building and extracting the files
     static createDOMTree(blah, dom) {
         return $a32bf89f10f59818$var$__awaiter(this, void 0, void 0, function*() {
-            console.log("createDOMTree", dom);
             if (dom == null) {
+                console.log("Error");
                 (0, $168feb6423e4d4f4$export$2191b9da168c6cf0).throwError((0, $168feb6423e4d4f4$export$43a750ddd9f2303e).NO_ELEMENT);
                 return;
             }
             if (dom.nodeType != Node.ELEMENT_NODE) return;
+            // console.log('createDOMTree', dom);
             if (dom.nodeName.startsWith("BLAH")) yield $a32bf89f10f59818$export$8a7e3c02f0a262c7.handleCustomNodes(blah, dom);
+            console.log(dom.childNodes);
             for(let i = 0; i < dom.childNodes.length; i++){
                 const node = dom.childNodes[i];
-                yield $a32bf89f10f59818$export$8a7e3c02f0a262c7.createDOMTree(blah, node);
+                if (dom.nodeType == Node.ELEMENT_NODE) {
+                    if (node.nodeName.startsWith("BLAH")) console.log("Found ", node, "parent of", dom);
+                    yield $a32bf89f10f59818$export$8a7e3c02f0a262c7.createDOMTree(blah, node);
+                }
             }
         });
     }
@@ -536,7 +541,6 @@ class $fe673acc26d28f6f$export$8ba59ee53d0339a0 {
         this.signal = new (0, $730fd1ef0151d5f5$export$8210dfe1863c478)(this);
         this.script = {};
         this.id = "";
-        console.log("Sara");
     }
     // ? Getters
     get domMap() {
@@ -550,7 +554,8 @@ class $fe673acc26d28f6f$export$8ba59ee53d0339a0 {
         return $fe673acc26d28f6f$var$__awaiter(this, void 0, void 0, function*() {
             this.id = id;
             console.log("StartApp");
-            yield (0, $a32bf89f10f59818$exports.AppDOM).createDOMTree(this, document.getElementById(id));
+            this.dom.setInitialDOM(document.getElementById(id));
+            (0, $a32bf89f10f59818$exports.AppDOM).createDOMTree(this, this.dom.getInitialDOM());
         });
     }
     // ? For parsing .blah files
@@ -560,7 +565,6 @@ class $fe673acc26d28f6f$export$8ba59ee53d0339a0 {
             this.id = id;
             console.log("startBlah", id);
             this.dom.setInitialDOM((0, $a32bf89f10f59818$exports.AppDOM).getElementByBlahID(id));
-            console.log(this.dom.getInitialDOM());
             // for (let i = 0; i < this.dom.getInitialDOM().children.length; i++) {
             //     await AppDOM.createDOMTree(this, this.dom.getInitialDOM().children[i] as HTMLElement);
             // }
@@ -578,4 +582,4 @@ var $fe673acc26d28f6f$export$2e2bcd8739ae039 = $fe673acc26d28f6f$var$blah;
 
 
 export {$fe673acc26d28f6f$export$2e2bcd8739ae039 as Blah};
-//# sourceMappingURL=bundle.js.map
+//# sourceMappingURL=index.js.map

@@ -28,7 +28,8 @@ export class Blah {
     public async StartApp(id: string) {
         this.id = id;
         console.log('StartApp');
-        await AppDOM.createDOMTree(this, document.getElementById(id));
+        this.dom.setInitialDOM(document.getElementById(id));
+        AppDOM.createDOMTree(this, this.dom.getInitialDOM());
     }
 
     // ? For parsing .blah files
@@ -37,7 +38,7 @@ export class Blah {
         this.id = id;
         console.log('startBlah', id);
         this.dom.setInitialDOM(AppDOM.getElementByBlahID(id));
-        console.log(this.dom.getInitialDOM());
+
 
         // for (let i = 0; i < this.dom.getInitialDOM().children.length; i++) {
         //     await AppDOM.createDOMTree(this, this.dom.getInitialDOM().children[i] as HTMLElement);

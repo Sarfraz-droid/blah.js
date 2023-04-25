@@ -1,3 +1,3 @@
-import { Blah } from "./bundle.js"
+import { Blah } from "./bundle/index.js"
 
 Blah.StartApp('app');

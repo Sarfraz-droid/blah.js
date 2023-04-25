@@ -1,5 +1,5 @@
 <template>
-    <div class="py-24 px-12  flex flex-col  gap-8 min-h-screen">
+    <div class="py-24 px-12  flex flex-col justify-center items-center gap-8 min-h-screen">
         <h1 class="text-6xl font-bold flex gap-2 text-white  rounded-lg">
             This is
             <p>
@@ -11,7 +11,7 @@
         </p>
 
         <div class="border-t-2" />
-        <div class="my-10 flex flex-col gap-4">
+        <div class="my-10 flex flex-col gap-4 justify-center items-center text-center">
             <h3 class="font-semibold text-2xl">
                 Hi! {{ name }}
             </h3>
@@ -30,7 +30,7 @@
                 </button>
             </div>
         </div>
-        <div class="flex mt-28">
+        <div class="justify-center items-center flex">
             <!-- Place this tag where you want the button to render. -->
             <!-- Place this tag where you want the button to render. -->
             <!-- Place this tag where you want the button to render. -->

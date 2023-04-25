@@ -1,6 +1,7 @@
 <template>
-  <div class="flex justify-center items-center bg-black/80 text-white min-h-screen font-main">
-    <blah.template path="src/left.blah" />
+  <div class="flex justify-center min-w-full items-center bg-black/80 text-white min-h-screen font-main">
+    <blah.template path="src/left.blah" class="w-1/2"></blah.template>
+    <blah.template path="src/right.blah" class="w-1/2"></blah.template>
 </template>
 <script>
 </script>

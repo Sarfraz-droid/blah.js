@@ -3,7 +3,7 @@ import { FileParser } from "../parser/FileParser";
 
 export class CustomElement {
     public static async Template(blah: Blah, path: string, dom: Element) {
-        console.log("Template Hot Reloaded", path);
+        console.log("Template Hot Reloaded", path, dom);
 
         const data = await FileParser.parseFile(path);
         const templateDiv = data.template;

@@ -1,0 +1,125 @@
+<template>
+    <div class="min-h-screen h-screen  p-4 flex flex-col justify-center items-center">
+        <ul id="tabs" class="inline-flex w-full px-1 pt-2 font-mono h-14">
+            <li class="px-4 py-2 -mb-px font-semibold text-white cursor-pointer rounded-lg bg-white/20 flex flex-col self-center transition-all"
+                id="code-tab" @click="changeTab">code.blah
+            </li>
+            <li class="px-4 py-2 font-semibold rounded-lg flex flex-col cursor-pointer self-center transition-all"
+                id="index-tab" @click="changeTab">
+                index.html</li>
+            <li class="px-4 py-2 font-semibold rounded-lg flex flex-col cursor-pointer self-center transition-all"
+                id="main-tab" @click="changeTab">
+                main.js</li>
+        </ul>
+        <pre class="bg-blue-50/10 px-4 font-mono w-full h-5/6 overflow-auto rounded-lg hover:bg-white/20 transition-all"
+            id="current">
+        </pre>
+    </div>
+</template>
+<script>
+    const code = `
+<template>
+    <div class="py-24 px-12  flex flex-col  gap-8 min-h-screen">
+        <h1 class="text-6xl font-bold flex gap-2 text-white  rounded-lg">
+            This is
+            <p>
+                Blah.js
+            </p>
+        </h1>
+        <p class="italic">
+            Toy Library for creating Web Components
+        </p>
+
+        <div class="border-t-2" />
+        <div class="my-10 flex flex-col gap-4">
+            <h3 class="font-semibold text-2xl">
+                Hi! {{ name }}
+            </h3>
+
+            <div class="gap-3 flex ">
+                <p class="self-center">
+                    Enter your Name
+                </p>
+                <input value="{{ name }}" @input="updateInput" placeholder="Enter your Name"
+                    class="border-2 border-black rounded-lg p-2 bg-black/30" />
+            </div>
+            <div>
+                <button class="bg-black/80 text-white rounded-lg p-2 px-4 hover:bg-black/60 transition-all duration-200"
+                    @click="updateCount">
+                    You have clicked {{ counter }} times
+                </button>
+            </div>
+        </div>
+    </div>
+<\/template>
+
+<script>
+    const count = blah.signal.createState(0, "counter");
+
+    const name = blah.signal.createState("Your Name", "name");
+
+    blah.signal.createHook((e) => {
+        name.data = e.target.value;
+    }, "updateInput");
+
+    blah.signal.createHook((e) => {
+        count.data++;
+    }, "updateCount");
+<\/script>
+`;
+
+    const index = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Vite App</title>
+<\/head>
+
+<body>
+    <div id="app">
+        <blah.template path="src/main.blah">
+    </div>
+    <script type="module" src="./main.js"><\/script>
+<\/body>
+
+<\/html>
+`;
+
+    const main = `
+import { Blah } from "./bundle/index.js"
+
+Blah.StartApp('app');
+`;
+    const current = document.getElementById("current");
+
+    current.innerText = code;
+
+    blah.signal.createHook((e) => {
+        const id = e.target.id;
+        const tabs = document.getElementById("tabs");
+
+        for (let i = 0; i < tabs.children.length; i++) {
+            const tab = tabs.children[i];
+
+            if (tab.id != id) {
+                tab.classList.remove("bg-white/20");
+            } else {
+                tab.classList.add("bg-white/20")
+            }
+        }
+
+        switch (id) {
+            case "code-tab":
+                current.innerText = code;
+
+                break;
+            case "index-tab":
+                current.innerText = index;
+                break;
+            case "main-tab":
+                current.innerText = main;
+                break;
+        }
+    }, "changeTab");
+
+</script>

@@ -11,7 +11,7 @@ enum NodeType {
 export class AppDOM {
     static async handleCustomNodes(blah: Blah, dom: Element) {
         const nodeName = dom.nodeName.replace("BLAH.", "");
-        console.log("Handling Custom Nodes", nodeName);
+        // console.log("Handling Custom Nodes", nodeName);
         switch (nodeName) {
             case NodeType.TEMPLATE:
                 await CustomElement.Template(blah, dom.getAttribute('path') as string, dom);
@@ -28,22 +28,31 @@ export class AppDOM {
         dom: Element | null
     ) {
 
-        console.log('createDOMTree', dom);
         if (dom == null) {
+            console.log("Error")
             ValidationError.throwError(ErrorTypes.NO_ELEMENT);
             return;
         }
+
         if (dom.nodeType != Node.ELEMENT_NODE) {
             return;
         }
+        // console.log('createDOMTree', dom);
         if (dom.nodeName.startsWith("BLAH")) {
             await AppDOM.handleCustomNodes(blah, dom);
-            return;
         }
+
+        console.log(dom.childNodes);
 
         for (let i = 0; i < dom.childNodes.length; i++) {
             const node = dom.childNodes[i];
-            await AppDOM.createDOMTree(blah, node as Element);
+
+            if (dom.nodeType == Node.ELEMENT_NODE) {
+                if (node.nodeName.startsWith("BLAH")) {
+                    console.log("Found ", node, "parent of", dom);
+                }
+                await AppDOM.createDOMTree(blah, node as Element);
+            }
 
         }
     }
