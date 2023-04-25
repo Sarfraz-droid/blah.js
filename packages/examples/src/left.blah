@@ -1,0 +1,64 @@
+<template>
+    <div class="py-24 px-12  flex flex-col justify-center items-center gap-8 min-h-screen">
+        <h1 class="text-6xl font-bold flex gap-2 text-white  rounded-lg">
+            This is
+            <p>
+                Blah.js
+            </p>
+        </h1>
+        <p class="italic">
+            Toy Library for creating Web Components
+        </p>
+
+        <div class="border-t-2" />
+        <div class="my-10 flex flex-col gap-4 justify-center items-center text-center">
+            <h3 class="font-semibold text-2xl">
+                Hi! {{ name }}
+            </h3>
+
+            <div class="gap-3 flex ">
+                <p class="self-center">
+                    Enter your Name
+                </p>
+                <input value="{{ name }}" @input="updateInput" placeholder="Enter your Name"
+                    class="border-2 border-black rounded-lg p-2 bg-black/30" />
+            </div>
+            <div>
+                <button class="bg-black/80 text-white rounded-lg p-2 px-4 hover:bg-black/60 transition-all duration-200"
+                    @click="updateCount">
+                    You have clicked {{ counter }} times
+                </button>
+            </div>
+        </div>
+        <div class="justify-center items-center flex">
+            <!-- Place this tag where you want the button to render. -->
+            <!-- Place this tag where you want the button to render. -->
+            <!-- Place this tag where you want the button to render. -->
+            <a class="github-button bg-black p-2 inline-flex gap-2 rounded-md"
+                href="https://github.com/Sarfraz-droid/blah.js"
+                data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large"
+                data-show-count="true" aria-label="Star Sarfraz-droid/blah.js on GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                </svg>
+
+                Star on Github</a>
+        </div>
+    </div>
+</template>
+
+<script>
+    const count = blah.signal.createState(0, "counter");
+
+    const name = blah.signal.createState("Your Name", "name");
+
+    blah.signal.createHook((e) => {
+        name.data = e.target.value;
+    }, "updateInput");
+
+    blah.signal.createHook((e) => {
+        count.data++;
+    }, "updateCount");
+</script>

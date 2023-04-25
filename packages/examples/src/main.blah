@@ -1,0 +1,6 @@
+<template>
+  <div class="flex justify-center items-center bg-black/80 text-white min-h-screen font-main">
+    <blah.template path="src/left.blah" />
+</template>
+<script>
+</script>

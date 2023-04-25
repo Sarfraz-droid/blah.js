@@ -1,0 +1,1 @@
+export { default as Blah } from './components/blah';

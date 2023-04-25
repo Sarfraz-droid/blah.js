@@ -1,0 +1,44 @@
+{
+	"name": "blahjs-language-support",
+	"displayName": "Blahjs Language Support",
+	"description": "",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.77.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "blah",
+				"aliases": [
+					"Blah.js",
+					""
+				],
+				"extensions": [
+					".blah"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "blah",
+				"scopeName": "source.blah",
+				"path": "./syntaxes/.tmLanguage.json",
+				"embeddedLanguages": {
+					"text.html": "html",
+					"source.css": "css",
+					"source.js": "javascript",
+					"source.python": "python",
+					"source.smarty": "smarty"
+				},
+				"tokenTypes": {
+					"meta.tag string.quoted": "other"
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,22 @@
+<template>
+    <div>
+        Test {{ in }} {{ counter }}
+    </div>
+    <button @click="updateCount">
+        This should Update the Function
+    </button>
+    <input type="text" @input="updateInput" />
+</template>
+
+<script>
+    const count = blah.signal.createState(0, "counter");
+    const input = blah.signal.createState("", "in");
+
+    blah.signal.createHook((e) => {
+        input.data = e.target.value;
+    }, "updateInput");
+
+    blah.signal.createHook((e) => {
+        count.data++;
+    }, "updateCount");
+</script>
