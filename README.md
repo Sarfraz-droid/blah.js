@@ -9,3 +9,10 @@
 
 
 > Currently in development
+
+TODOS: 
+- [ ] Comments and Code Refactor
+- [ ] Testing
+- [ ] Conditional Rendering
+- [ ] Loops
+- [ ] CI/CD
