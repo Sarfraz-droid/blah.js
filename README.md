@@ -12,7 +12,7 @@
 
 TODOS: 
 - [ ] Comments and Code Refactor
-- [ ] Testing
+- [X] Testing
 - [ ] Conditional Rendering
 - [ ] Loops
 - [X] CI/CD
