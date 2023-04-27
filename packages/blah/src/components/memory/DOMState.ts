@@ -2,6 +2,7 @@ import { ErrorTypes, ValidationError } from "../error/error";
 import { Blah } from "../blah";
 
 export class DOMState {
+    /** variables */
     private initialDOM: HTMLElement = document.createElement('div');
     private currentDOM: HTMLElement = document.createElement('div');
 
@@ -9,11 +10,17 @@ export class DOMState {
     constructor(public blah: Blah) {
     }
 
+    /** getters */
     get getActiveDOM(): Element | null {
         return document.activeElement;
     }
 
 
+    /**
+     * @description Adds parser specific "blah-id" to the element component.
+     * @param element HTMLElement
+     * @returns 
+     */
     public initializeElement(element: HTMLElement): void {
         if (element.getAttribute('blah-id') != null) {
             return;

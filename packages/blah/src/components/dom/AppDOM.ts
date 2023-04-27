@@ -9,9 +9,11 @@ enum NodeType {
 }
 
 export class AppDOM {
+    /***
+     * Handles Custom Nodes
+     */
     static async handleCustomNodes(blah: Blah, dom: Element) {
         const nodeName = dom.nodeName.replace("BLAH.", "");
-        // console.log("Handling Custom Nodes", nodeName);
         switch (nodeName) {
             case NodeType.TEMPLATE:
                 await CustomElement.Template(blah, dom.getAttribute('path') as string, dom);
@@ -22,7 +24,11 @@ export class AppDOM {
         }
     }
 
-    // ? Building and extracting the files
+    /**
+     * Builds the DOM Tree
+     * @param Blah
+     * @dom Element | Null
+     */
     static async createDOMTree(
         blah: Blah,
         dom: Element | null
@@ -42,22 +48,22 @@ export class AppDOM {
             await AppDOM.handleCustomNodes(blah, dom);
         }
 
-        console.log(dom.childNodes);
-
         for (let i = 0; i < dom.childNodes.length; i++) {
             const node = dom.childNodes[i];
 
             if (dom.nodeType == Node.ELEMENT_NODE) {
-                if (node.nodeName.startsWith("BLAH")) {
-                    console.log("Found ", node, "parent of", dom);
-                }
                 await AppDOM.createDOMTree(blah, node as Element);
             }
 
         }
     }
 
-    // ? Parsing the elements
+    /**
+     * Parses the dom.
+     * @param blah Blah
+     * @param dom Element
+     * @returns 
+     */
     static createDOM(
         blah: Blah,
         dom: Element | null
@@ -86,6 +92,7 @@ export class AppDOM {
             ElementParserRoot.parse(node as Element, blah);
         }
     }
+
 
 
     static handleNodeUpdate(
@@ -131,6 +138,7 @@ export class AppDOM {
 
     }
 
+    /********** Utility functions ************************/
     public static getBlahID(element: HTMLElement): string {
         const blahID = element.getAttribute('blah-id');
         if (blahID == null) {
@@ -147,6 +155,8 @@ export class AppDOM {
         }
         return element as HTMLElement;
     }
+
+    /*****************************************************/
 }
 
 

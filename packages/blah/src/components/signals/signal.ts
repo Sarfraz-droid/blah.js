@@ -1,5 +1,5 @@
 import { Blah } from "../blah";
-import { CreateFunction } from "./CreateFunction";
+import { Hook } from "./Hook";
 import { State } from "./state";
 
 export class Signal {
@@ -11,8 +11,8 @@ export class Signal {
         return state;
     }
 
-    public createHook(func: () => any, variableName: string): CreateFunction {
-        const state = new CreateFunction(func, this.root, variableName);
+    public createHook(func: () => any, variableName: string): Hook {
+        const state = new Hook(func, this.root, variableName);
         return state;
     }
 }

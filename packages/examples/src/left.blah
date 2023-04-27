@@ -2,7 +2,7 @@
     <div class="py-24 px-12  flex flex-col  gap-8 min-h-screen">
         <h1 class="text-6xl font-bold flex gap-2 text-white  rounded-lg">
             This is
-            <p>
+            <p data-testId="title">
                 Blah.js
             </p>
         </h1>
@@ -12,7 +12,7 @@
 
         <div class="border-t-2" />
         <div class="my-10 flex flex-col gap-4">
-            <h3 class="font-semibold text-2xl">
+            <h3 class="font-semibold text-2xl" data-testId="display-name">
                 Hi! {{ name }}
             </h3>
 
@@ -21,11 +21,11 @@
                     Enter your Name
                 </p>
                 <input value="{{ name }}" @input="updateInput" placeholder="Enter your Name"
-                    class="border-2 border-black rounded-lg p-2 bg-black/30" />
+                    class="border-2 border-black rounded-lg p-2 bg-black/30" data-testId="input-name" />
             </div>
             <div>
                 <button class="bg-black/80 text-white rounded-lg p-2 px-4 hover:bg-black/60 transition-all duration-200"
-                    @click="updateCount">
+                    @click="updateCount" data-testId="button-counter">
                     You have clicked {{ counter }} times
                 </button>
             </div>

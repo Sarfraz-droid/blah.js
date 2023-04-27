@@ -1,16 +1,20 @@
 import { Blah } from "../blah";
 import { FileParser } from "../parser/FileParser";
 
+/**
+ * Custom Element Functions
+ * @class
+ */
 export class CustomElement {
     public static async Template(blah: Blah, path: string, dom: Element) {
-        console.log("Template Hot Reloaded", path, dom);
+        // console.log("Template Hot Reloaded", path, dom);
 
         const data = await FileParser.parseFile(path);
         const templateDiv = data.template;
 
-        console.log('====================================');
-        console.log(data.template, data.script);
-        console.log('====================================');
+        // console.log('====================================');
+        // console.log(data.template, data.script);
+        // console.log('====================================');
 
         blah.dom.initializeElement(dom as HTMLElement);
         const templateDuplicate = templateDiv?.content.cloneNode(true) as Node;

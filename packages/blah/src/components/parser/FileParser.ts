@@ -29,11 +29,6 @@ export class FileParser {
 
     static async scriptRunner(script: string, blah: Blah) {
         const _script = new Function("blah", script);
-
-        console.log("Running Script", _script);
         blah.script = _script(blah);
-
-        // console.log("Running Script", blah)
-
     }
 }

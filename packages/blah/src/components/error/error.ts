@@ -7,6 +7,9 @@ export enum ErrorTypes {
     NO_ID = "NO_ID"
 }
 
+/**
+ * Error Handler
+ */
 export class ValidationError {
     constructor() {
     }

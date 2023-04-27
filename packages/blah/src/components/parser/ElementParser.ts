@@ -1,18 +1,27 @@
 import blah, { Blah } from "../blah";
 import { AppDOM } from "../dom/AppDOM";
-import { CreateFunction } from "../signals/CreateFunction";
+import { Hook } from "../signals/Hook";
 
+/**
+ * Handles Element parsing
+ * @class
+ */
 export class ElementParserRoot {
 
+    // * Variables
     static variableRegex = /{{(.*?)}}/g;
     static bracketRegex = /{(.*?)}/g;
 
+    /**
+     * Parses the element
+     * @param element Element
+     * @param root Blah
+     */
     public static parse(
         element: Element,
         root: Blah
     ) {
 
-        console.log("ElementParserRoot.parse", element, root)
         ElementParserRoot.parseAttribute(element as HTMLElement, root);
         ElementParserRoot.parseVariable(element as Element, root);
     }
@@ -25,6 +34,12 @@ export class ElementParserRoot {
 
     }
 
+
+    /**
+     * Parses the attributes
+     * @param element HTMLElement
+     * @param root Blah
+     */
     public static parseAttribute(
         element: HTMLElement,
         root: Blah
@@ -43,7 +58,7 @@ export class ElementParserRoot {
                     console.log("Event Triggered");
                     console.log(attribValue);
                     const value = root.memory.getSignal(attribValue.trim());
-                    if (value instanceof CreateFunction) {
+                    if (value instanceof Hook) {
                         console.log("Function Called");
                         value.runFunction([
                             e
@@ -70,6 +85,12 @@ export class ElementParserRoot {
         }
     }
 
+    /**
+     * Parses the variables inside the TEXT_NODEs
+     * @param element Element
+     * @param root Blah
+     * @returns 
+     */
     public static parseVariable(
         element: Element,
         root: Blah

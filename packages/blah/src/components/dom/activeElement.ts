@@ -1,6 +1,7 @@
 import { Blah } from "../blah";
 import { AppDOM } from "./AppDOM";
 
+
 enum ActiveElementTagName {
     INPUT = "INPUT",
     TEXTAREA = "TEXTAREA",
@@ -8,6 +9,9 @@ enum ActiveElementTagName {
     BUTTON = "BUTTON",
 }
 
+/**
+ * @description Used to handle the active Elements after refresh of the page.
+ */
 export class ActiveElement {
     public static getActiveElement(): HTMLElement {
         return document.activeElement as HTMLElement;

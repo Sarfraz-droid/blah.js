@@ -1,6 +1,10 @@
 import { Blah } from "../blah";
 
-export class CreateFunction {
+/**
+ * Handles Functions for Blah
+ * @class
+ */
+export class Hook {
 
     constructor(
         public value: Function,
