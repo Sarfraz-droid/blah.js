@@ -6,7 +6,8 @@
   "scripts": {
     "tailwind-watch": "tailwindcss -i ./input.css -o ./output.css --watch",
     "serve": "serve",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --headless --browser chrome"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
