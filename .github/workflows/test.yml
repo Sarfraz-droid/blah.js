@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Build and Run Tests
 
 on: [push, pull_request]
 
@@ -12,6 +12,16 @@ jobs:
           node-version: 16
       - run: npm install
       - name: Install dependencies
-        run: cd ./packages/examples/ && npm install
+        run: |
+          cd ./packages/examples/
+          npm install
+      - name: Build Library
+        run: |
+          cd ./packages/blah/
+          npm install
+          npm run build
+          npm run copy
       - name: Run Tests
-        run: npx nx run examples:cy:run
+        run: |
+          npm install -g start-server-and-test
+          start-server-and-test npx nx run examples:serve npx nx run examples:cy:run
