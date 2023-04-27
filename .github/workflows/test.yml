@@ -23,3 +23,11 @@ jobs:
           npm run copy
       - name: Run Tests
         run: npx nx run examples:test
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Cypress screenshots
+          path: packages/examples/cypress/screenshots
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Cypress Videos
+          path: packages/examples/cypress/videos
