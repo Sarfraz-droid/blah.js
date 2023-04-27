@@ -1,0 +1,25 @@
+name: Build and Run Tests
+
+on: [push, pull_request]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install
+      - name: Install dependencies
+        run: |
+          cd ./packages/examples/
+          npm install
+      - name: Build Library
+        run: |
+          cd ./packages/blah/
+          npm install
+          npm run build
+          npm run copy
+      - name: Run Tests
+        run: npx nx run examples:test
