@@ -24,4 +24,4 @@ jobs:
       - name: Run Tests
         run: |
           npm install -g start-server-and-test
-          start-server-and-test npx nx run examples:serve npx nx run examples:cy:run
+          start-server-and-test npx nx run examples:serve 3000 npx nx run examples:cy:run
