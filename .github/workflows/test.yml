@@ -23,5 +23,6 @@ jobs:
           npm run copy
       - name: Run Tests
         run: |
+          cd ./packages/blah/
           npm install -g start-server-and-test
-          start-server-and-test npx nx run examples:serve 3000 npx nx run examples:cy:run
+          start-server-and-test serve 3000 cy:run
