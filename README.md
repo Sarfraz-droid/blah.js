@@ -11,7 +11,7 @@
 > Currently in development
 
 TODOS: 
-- [ ] Comments and Code Refactor
+- [X] Comments and Code Refactor
 - [X] Testing
 - [ ] Conditional Rendering
 - [ ] Loops
