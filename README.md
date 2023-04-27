@@ -15,4 +15,4 @@ TODOS:
 - [ ] Testing
 - [ ] Conditional Rendering
 - [ ] Loops
-- [ ] CI/CD
+- [X] CI/CD
