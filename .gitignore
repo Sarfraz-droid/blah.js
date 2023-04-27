@@ -16,7 +16,7 @@ node_modules
 *.launch
 .settings/
 *.sublime-workspace
-
+packages/examples/cypress/videos/
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json
@@ -37,3 +37,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+/packages/examples/cypress/videos
+/packages/examples/cypress/screenshots
+.gitignore
+package-lock.json
