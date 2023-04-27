@@ -22,4 +22,4 @@ jobs:
           npm run build
           npm run copy
       - name: Run Tests
-        run: npx nx examples:test
+        run: npx nx run examples:test
