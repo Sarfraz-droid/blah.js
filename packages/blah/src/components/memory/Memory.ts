@@ -3,6 +3,12 @@ import { ErrorTypes, ValidationError } from "../error/error";
 import { Hook } from "../signals/Hook";
 import { State } from "../signals/state";
 
+export interface ICustomElement {
+    root: Element;
+    true?: Element | null;
+    false?: Element | null;
+}
+
 /**
  * @description This class is used to store the state of the application. It is used to store the signals and the DOM elements
  */
@@ -12,13 +18,15 @@ export class Memory {
 
     }
 
-    private signals = new Map<string, State<any> | Hook>();
+    public signals = new Map<string, State<any> | Hook>();
     // Track the signals used in DOM Element
     public signalMaps: Map<string, Set<string>> = new Map<string, Set<string>>();
 
     public domMap: Map<string, HTMLElement> = new Map<string, HTMLElement>();
 
     public updatedVariables: Set<string> = new Set<string>; // Track the updated variables
+
+    public customElements: Map<string, ICustomElement> = new Map<string, ICustomElement>();
 
     /** get Signal or Hook Value */
     public getSignal<T>(key: string): State<T> | Hook | undefined {
@@ -48,5 +56,18 @@ export class Memory {
     /** get linkedDOMs of the signal */
     public linkedDOMs(signal: string): Set<string> | undefined {
         return this.signalMaps.get(signal);
+    }
+
+    public getSignalData() {
+        let _data = Object.fromEntries(this.signals);
+        let data: {
+            [key: string]: any
+        } = {};
+        Object.keys(_data).forEach((value) => {
+            console.log("getSignalData", value, this.getSignal(value)?.value)
+            data[value] = this.getSignal(value)?.value;
+        })
+
+        return data;
     }
 }

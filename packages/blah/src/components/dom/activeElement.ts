@@ -9,6 +9,11 @@ enum ActiveElementTagName {
     BUTTON = "BUTTON",
 }
 
+interface IActiveElementInfo {
+    selectionStart: number
+    blahId: string
+}
+
 /**
  * @description Used to handle the active Elements after refresh of the page.
  */
@@ -17,13 +22,23 @@ export class ActiveElement {
         return document.activeElement as HTMLElement;
     }
 
+    public static getActiveElementInfo(
+        dom: HTMLElement
+    ) {
+        const selectionStart = (dom as HTMLInputElement).selectionStart;
+        const blahID = AppDOM.getBlahID(dom);
+        return {
+            selectionStart,
+            blahId: blahID
+        } as IActiveElementInfo
+    }
+
     public static handleActiveElement(
-        id: string,
-        clone: Element,
+        element: HTMLElement,
+        ActiveInfo: IActiveElementInfo,
         root: Blah
     ): void {
 
-        const element = AppDOM.getElementByBlahID(id);
 
         element.focus();
 
@@ -31,20 +46,20 @@ export class ActiveElement {
         switch (element.tagName) {
             case ActiveElementTagName.TEXTAREA:
             case ActiveElementTagName.INPUT:
-                ActiveElement.handleInput(element as HTMLInputElement, clone as HTMLInputElement);
+                ActiveElement.handleInput(element as HTMLInputElement, ActiveInfo);
                 break;
             default:
                 break;
         }
     }
 
-    public static handleInput(element: HTMLInputElement, clone: HTMLInputElement): void {
+    public static handleInput(element: HTMLInputElement, active: IActiveElementInfo): void {
         // element.select();
 
-        const caretPosition = clone.selectionStart;
-        element.setSelectionRange(caretPosition, caretPosition);
         console.log('====================================');
-        console.log(element.selectionStart, element.selectionEnd);
+        console.log("handleInput", active.selectionStart);
         console.log('====================================');
+        element.setSelectionRange(active.selectionStart + 1, active.selectionStart + 1);
     }
+
 }
