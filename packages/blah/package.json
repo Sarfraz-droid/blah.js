@@ -1,22 +1,39 @@
 {
-  "name": "blah",
-  "version": "0.1.0",
+  "name": "@sarf_alam/blahjs",
+  "version": "0.0.1",
   "description": "",
-  "source": "dist/index.js",
-  "main": "build/index.js",
-  "type": "module",
+  "source": "src/index.ts",
+  "main": "build/main.js",
+  "module": "build/module.js",
+  "global": "build/global.js",
+  "browser": "build/browser.js",
+  "types": "build/types.d.ts",
+  "targets": {
+    "global": {
+      "outputFormat": "global"
+    },
+    "main": {
+      "context": "browser"
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "tsc --watch",
     "build": "rm -rf build && mkdir build && tsc && parcel build",
-    "copy" : "cp ./build/index.js ../examples/bundle && cp ./build/index.js.map ../examples/bundle"
+    "copy": "rm -rf ../examples/build && cp -r ./build ../examples/build"
   },
   "keywords": [],
   "author": "",
+  "files": [
+    "build/"
+  ],
   "license": "ISC",
   "devDependencies": {
+    "@parcel/packager-ts": "^2.8.3",
+    "@parcel/transformer-typescript-types": "^2.8.3",
     "@types/babel__core": "^7.20.0",
     "parcel": "^2.8.3",
+    "typescript": "^5.0.4",
     "webpack": "^5.80.0",
     "webpack-cli": "^5.0.2"
   }
