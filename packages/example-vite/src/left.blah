@@ -30,6 +30,29 @@
                 </button>
             </div>
         </div>
+        <!-- {%
+        data.counter == 0 ? "Hello": "No"
+        %}
+        {% 1 == 1 && counter %}
+        {% 1 == 2 && Should Not Show %} -->
+        <blah.if case="
+                (data) => {
+                    return data.counter == 1
+                }
+            ">
+            <div>
+                <blah.true>
+                    <div>
+                        Hello {{counter}}
+                    </div>
+                </blah.true>
+                <blah.false>
+                    <div>
+                        Ok {{counter}}
+                    </div>
+                </blah.false>
+            </div>
+        </blah.if>
         <div class="justify-center items-center flex">
             <!-- Place this tag where you want the button to render. -->
             <!-- Place this tag where you want the button to render. -->

@@ -30,6 +30,36 @@
                 </button>
             </div>
         </div>
+        <div>
+            <blah.if case="
+                                    (data) => {
+                                        return data.counter < 2
+                                    }
+                                " data-testId="if_case_counter_1">
+                <div>
+                    <blah.true>
+                        <div data-testId="if_case_counter_1_true">
+                            Don't click me twice >.< </div>
+                    </blah.true>
+                    <blah.false>
+                        <div data-testId="if_case_counter_1_false">
+                            Okay Now!
+
+                            <blah.if case="
+                                    (data) => data.counter < 3
+                                " data-testId="if_case_counter_2">
+                                <blah.true>
+                                    Don't click me thrice!
+                                </blah.true>
+                                <blah.false>
+                                    Ughh! T.T
+                                </blah.false>
+                            </blah.if>
+                        </div>
+                    </blah.false>
+                </div>
+            </blah.if>
+        </div>
         <div class="flex mt-28">
             <!-- Place this tag where you want the button to render. -->
             <!-- Place this tag where you want the button to render. -->

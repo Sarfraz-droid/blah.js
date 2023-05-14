@@ -1,6 +1,9 @@
 import blah, { Blah } from "../blah";
 import { AppDOM } from "../dom/AppDOM";
+import { CustomElement } from "../dom/CustomElement";
+import { NodeType } from "../dom/types";
 import { Hook } from "../signals/Hook";
+import { TextParser } from "./conditional/TextParser";
 
 /**
  * Handles Element parsing
@@ -17,11 +20,12 @@ export class ElementParserRoot {
      * @param element Element
      * @param root Blah
      */
-    public static parse(
+    public static async parse(
         element: Element,
         root: Blah
     ) {
-
+        root.dom.initializeElement(element as HTMLElement);
+        await ElementParserRoot.parseQuery(element as Element, root);
         ElementParserRoot.parseAttribute(element as HTMLElement, root);
         ElementParserRoot.parseVariable(element as Element, root);
     }
@@ -33,6 +37,21 @@ export class ElementParserRoot {
 
 
     }
+
+    /***
+    * Handles Custom Nodes
+    */
+    static async handleCustomNodes(blah: Blah, dom: Element) {
+        const nodeName = dom.nodeName.replace("BLAH.", "");
+        switch (nodeName) {
+            case NodeType.IF:
+                await CustomElement.If(blah, dom as HTMLElement);
+                break;
+            default:
+                break;
+        }
+    }
+
 
 
     /**
@@ -117,6 +136,13 @@ export class ElementParserRoot {
         }
 
         textNode.textContent = text;
+    }
+
+    public static async parseQuery(
+        element: Element,
+        root: Blah
+    ) {
+        await this.handleCustomNodes(root, element);
     }
 
 }

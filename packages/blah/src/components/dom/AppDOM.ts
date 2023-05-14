@@ -3,26 +3,10 @@ import { ElementParserRoot } from "../parser/ElementParser";
 import { Blah } from "../blah";
 import { ActiveElement } from "./activeElement";
 import { CustomElement } from "./CustomElement";
+import { NodeType } from "./types";
 
-enum NodeType {
-    TEMPLATE = 'TEMPLATE',
-}
 
 export class AppDOM {
-    /***
-     * Handles Custom Nodes
-     */
-    static async handleCustomNodes(blah: Blah, dom: Element) {
-        const nodeName = dom.nodeName.replace("BLAH.", "");
-        switch (nodeName) {
-            case NodeType.TEMPLATE:
-                await CustomElement.Template(blah, dom.getAttribute('path') as string, dom);
-
-                break;
-            default:
-                break;
-        }
-    }
 
     /**
      * Builds the DOM Tree
@@ -45,7 +29,9 @@ export class AppDOM {
         }
         // console.log('createDOMTree', dom);
         if (dom.nodeName.startsWith("BLAH")) {
-            await AppDOM.handleCustomNodes(blah, dom);
+            const nodeName = dom.nodeName.replace("BLAH.", "");
+            if (nodeName == NodeType.TEMPLATE)
+                await CustomElement.Template(blah, dom.getAttribute("path") as string, dom);
         }
 
         for (let i = 0; i < dom.childNodes.length; i++) {
@@ -74,6 +60,13 @@ export class AppDOM {
             return;
         }
 
+        this.createDomHelper(blah, dom);
+    }
+
+    private static createDomHelper(
+        blah: Blah,
+        dom: Element
+    ) {
         blah.dom.initializeElement(dom as HTMLElement);
         const nodes = dom.childNodes;
 
@@ -88,30 +81,33 @@ export class AppDOM {
         node: Element
     ) {
         if (node.nodeType == Node.ELEMENT_NODE) {
-            AppDOM.createDOM(blah, node as HTMLElement);
             ElementParserRoot.parse(node as Element, blah);
+            AppDOM.createDOM(blah, node as HTMLElement);
         }
     }
 
 
 
-    static handleNodeUpdate(
+    static async handleNodeUpdate(
         blah: Blah,
         node: Node,
     ) {
         AppDOM.createDOM(blah, node as HTMLElement);
-        ElementParserRoot.parse(node as Element, blah);
+        await ElementParserRoot.parse(node as Element, blah);
     }
 
 
-    static updateDOM(
+    static async updateDOM(
         blah: Blah,
     ) {
-        console.log('updateDOM', blah.updatedVariables);
         let doms: Set<string> = new Set<string>();
         let active = ActiveElement.getActiveElement();
 
         console.log((active as HTMLInputElement).selectionStart);
+
+        console.log("Update Node", active, (active as HTMLInputElement).selectionEnd, (active.cloneNode(true) as HTMLInputElement).selectionStart);
+
+        const ActiveInfo = ActiveElement.getActiveElementInfo(active)
 
 
         blah.updatedVariables.forEach((variable) => {
@@ -119,20 +115,27 @@ export class AppDOM {
             if (domsSet)
                 domsSet.forEach((dom) => {
                     doms.add(dom);
+
                 })
 
         })
 
-        doms.forEach((dom) => {
+        const customNodes = Object.values(Object.fromEntries(blah.memory.customElements))
+
+        for (let _node of customNodes) {
+            await AppDOM.handleNodeUpdate(blah, _node.root)
+        }
+
+        for (let dom of doms) {
             const element = blah.domMap.get(dom)?.cloneNode(true);
             console.log(element);
             if (element) {
-                AppDOM.handleNodeUpdate(blah, element);
+                await AppDOM.handleNodeUpdate(blah, element);
                 document.querySelector(`[blah-id="${dom}"]`)?.replaceWith(element);
             }
-        })
+        }
 
-        ActiveElement.handleActiveElement(AppDOM.getBlahID(active), active, blah);
+        ActiveElement.handleActiveElement(AppDOM.getElementByBlahID(ActiveInfo.blahId), ActiveInfo, blah);
 
         blah.updatedVariables.clear();
 
