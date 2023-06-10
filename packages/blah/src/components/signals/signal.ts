@@ -13,6 +13,7 @@ export class Signal {
 
     public createHook(func: () => any, variableName: string): Hook {
         const state = new Hook(func, this.root, variableName);
+        console.log("HOOK CREATED", state);
         return state;
     }
 }

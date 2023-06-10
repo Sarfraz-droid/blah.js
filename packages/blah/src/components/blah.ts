@@ -47,7 +47,7 @@ export class Blah {
      * @param name string
      */
     public createHook(func: () => any, name: string) {
-        this.signal.createHook(func, name);
+        return this.signal.createHook(func, name);
     }
 
     /**

@@ -5,7 +5,7 @@ import { Blah } from "../blah";
  * @class
  */
 export class Hook {
-
+    run: Function;
     constructor(
         public value: Function,
         private root: Blah,
@@ -13,6 +13,7 @@ export class Hook {
     ) {
         this.root.memory.setSignal(this.uid, this);
         this.value = value;
+        this.run = value;
     }
 
     get data(): () => any {

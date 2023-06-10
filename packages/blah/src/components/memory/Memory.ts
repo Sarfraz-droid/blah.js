@@ -1,13 +1,9 @@
+import { ICustomElement } from "../../@types/CustomElements.types";
 import { Blah } from "../blah";
 import { ErrorTypes, ValidationError } from "../error/error";
 import { Hook } from "../signals/Hook";
 import { State } from "../signals/state";
 
-export interface ICustomElement {
-    root: Element;
-    true?: Element | null;
-    false?: Element | null;
-}
 
 /**
  * @description This class is used to store the state of the application. It is used to store the signals and the DOM elements

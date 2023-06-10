@@ -1,7 +1,7 @@
 import blah, { Blah } from "../blah";
 import { AppDOM } from "../dom/AppDOM";
-import { CustomElement } from "../dom/CustomElement";
-import { NodeType } from "../dom/types";
+import { CustomElement } from "../dom/custom_elements/index";
+import { NodeType } from "../../@types/CustomElements.types";
 import { Hook } from "../signals/Hook";
 import { TextParser } from "./conditional/TextParser";
 
@@ -46,6 +46,9 @@ export class ElementParserRoot {
         switch (nodeName) {
             case NodeType.IF:
                 await CustomElement.If(blah, dom as HTMLElement);
+                break;
+            case NodeType.LOOP:
+                await CustomElement.LOOP(blah, dom as HTMLElement);
                 break;
             default:
                 break;
