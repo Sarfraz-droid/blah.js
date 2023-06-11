@@ -31,6 +31,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Build Library
+        run: |
+          cd ./packages/blah/
+          npm install
+          npm run build
+          npm run copy
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
