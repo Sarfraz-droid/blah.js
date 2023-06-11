@@ -38,13 +38,6 @@ Why to use Blah.js?
 
 
 
-### Built With
-<img src="https://user-images.githubusercontent.com/73013838/234921678-8fea6b6b-1b1f-4d5c-9990-96b33dc8e4e1.png" width="32" >
-<img src="https://user-images.githubusercontent.com/73013838/234922861-646e5850-ed36-4451-b574-76aa523b5ce0.png" width="32" >
-<img src="https://user-images.githubusercontent.com/73013838/234923442-9f08f880-3f9e-4133-8f6e-2faff02e6986.png" width="32" >
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
