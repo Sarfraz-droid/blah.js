@@ -103,10 +103,3 @@ For more such examples you can check out the deployed website at https://sarfraz
 
 
 > Currently in development
-
-TODOS: 
-- [X] Comments and Code Refactor
-- [X] Testing
-- [ ] Conditional Rendering
-- [ ] Loops
-- [X] CI/CD
