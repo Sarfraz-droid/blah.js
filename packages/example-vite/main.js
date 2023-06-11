@@ -1,3 +1,3 @@
-import { Blah } from "../blah/dist/index.js"
+import Blah from "../blah/dist/index.js"
 
 Blah.StartApp('app');

@@ -1,29 +1,9 @@
-import { Blah } from "../blah";
-import { ErrorTypes, ValidationError } from "../error/error";
-import { ICustomElement } from "../memory/Memory";
-import { FileParser } from "../parser/FileParser";
-import { AppDOM } from "./AppDOM";
+import { ICustomElement } from "../../../@types/CustomElements.types";
+import { Blah } from "../../blah";
+import { ErrorTypes, ValidationError } from "../../error/error";
+import { AppDOM } from "../AppDOM";
 
-/**
- * Custom Element Functions
- * @class
- */
-export class CustomElement {
-    public static async Template(blah: Blah, path: string, dom: Element) {
-
-        const data = await FileParser.parseFile(path);
-        const templateDiv = data.template;
-
-        blah.dom.initializeElement(dom as HTMLElement);
-        const templateDuplicate = templateDiv?.content.cloneNode(true) as Node;
-        dom.insertBefore(templateDuplicate, dom.firstChild);
-
-        const _blah = new Blah();
-        await FileParser.scriptRunner(data.script as string, _blah);
-        console.log("Template", _blah)
-        _blah.startBlah(dom.getAttribute('blah-id') as string);
-    }
-
+export class BLAH_IF {
     public static async If(blah: Blah, dom: HTMLElement) {
         try {
             console.log("Custom Element - IF", dom)
@@ -67,4 +47,5 @@ export class CustomElement {
             console.log("CUSTOM ELEMENT", err)
         }
     }
+
 }

@@ -2,8 +2,8 @@ import { ErrorTypes, ValidationError } from "../error/error";
 import { ElementParserRoot } from "../parser/ElementParser";
 import { Blah } from "../blah";
 import { ActiveElement } from "./activeElement";
-import { CustomElement } from "./CustomElement";
-import { NodeType } from "./types";
+import { CustomElement } from "./custom_elements/index";
+import { NodeType } from "../../@types/CustomElements.types";
 
 
 export class AppDOM {

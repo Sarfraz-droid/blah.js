@@ -28,14 +28,24 @@
                     @click="updateCount" data-testId="button-counter">
                     You have clicked {{ counter }} times
                 </button>
+                <button class="bg-black/80 text-white rounded-lg p-2 px-4 hover:bg-black/60 transition-all duration-200"
+                    @click="addOp"
+                    data-testId="button-add">
+                    Add
+                </button>
+                <button class="bg-red-500/80 text-white rounded-lg p-2 px-4 hover:bg-red-600/60 transition-all duration-200"
+                    @click="removeOp"
+                    data-testId="button-remove">
+                    Remove
+                </button>
             </div>
         </div>
         <div>
             <blah.if case="
-                                    (data) => {
-                                        return data.counter < 2
-                                    }
-                                " data-testId="if_case_counter_1">
+                        (data) => {
+                            return data.counter < 2
+                        }
+                    " data-testId="if_case_counter_1">
                 <div>
                     <blah.true>
                         <div data-testId="if_case_counter_1_true">
@@ -59,6 +69,26 @@
                     </blah.false>
                 </div>
             </blah.if>
+        </div>
+        <div
+        >
+            <blah.loop
+                start="(data)=> 0"
+                end="(data)=> data.listCounter"
+                class="flex gap-2"
+                data-testId="loop"
+            >
+                <blah.child
+                >
+                    <button
+                        class="p-2 px-4 border-2 border-dotted rounded-md"
+                        @click="removeOp"
+                        data-testId="loop-item"
+                    >
+                        List
+                    </button>
+                </blah.child>
+            </blah.loop>
         </div>
         <div class="flex mt-28">
             <!-- Place this tag where you want the button to render. -->
@@ -84,6 +114,8 @@
 
     const name = blah.signal.createState("Your Name", "name");
 
+    const listCounter = blah.signal.createState(0,'listCounter');
+
     blah.signal.createHook((e) => {
         name.data = e.target.value;
     }, "updateInput");
@@ -91,4 +123,12 @@
     blah.signal.createHook((e) => {
         count.data++;
     }, "updateCount");
+
+    const add = blah.signal.createHook((e) => {
+        listCounter.data = Math.min(5,listCounter.data+1)
+    }, 'addOp')
+
+    const remove = blah.signal.createHook((e) => {
+        listCounter.data = Math.max(0,listCounter.data-1)
+    }, 'removeOp')
 </script>

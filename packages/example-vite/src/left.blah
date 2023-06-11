@@ -53,6 +53,16 @@
                 </blah.false>
             </div>
         </blah.if>
+        <blah.loop
+            start="() => 0"
+            end="(data) => data.counter"                                                                                                                                            
+        >
+        <blah.child>
+            <div>
+                Hello World
+            </div> 
+        </blah.child>
+        </blah.loop>
         <div class="justify-center items-center flex">
             <!-- Place this tag where you want the button to render. -->
             <!-- Place this tag where you want the button to render. -->
@@ -77,11 +87,15 @@
 
     const name = blah.signal.createState("Your Name", "name");
 
-    blah.signal.createHook((e) => {
-        name.data = e.target.value;
-    }, "updateInput");
-
-    blah.signal.createHook((e) => {
+    const updateCounter = blah.signal.createHook((e) => {
         count.data++;
     }, "updateCount");
+
+    const updateInput = blah.signal.createHook((e) => {
+        name.data = e.target.value;
+        updateCounter.run()
+    }, "updateInput");
+
+    console.log("HOOKS ",updateCounter.run, updateInput.value)
+
 </script>
